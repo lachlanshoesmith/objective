@@ -100,7 +100,7 @@
         <button @click="calculate">Calculate</button>
       </section>
       <h1 v-if="yearsToReachGoals > 0">
-        It will take you {{ yearsToReachGoals}} to reach your goals.
+        It will take you {{ yearsToReachGoals}} years to reach your goals.
       </h1>
     </main>
   </div>
@@ -195,7 +195,7 @@ export default {
       // first, figure out target
       // we need to calculate what the average house price will be. assume house prices rise 6% every year
       const averageHousePrice = this.cities[this.city].averageHousePrice
-      let housePrice = averageHousePrice
+      const housePrice = averageHousePrice
       const lifeSpending = parseInt(this.lifeSpending)
       const foodSpending = parseInt(this.foodSpending)
       const recreationalSpending = parseInt(this.recreationalSpending)
@@ -227,8 +227,9 @@ export default {
       while (income <= target) {
         income += (currentWage * hoursWorked) * 52
         income -= (lifeSpending * 52) + (foodSpending * 52) + (recreationalSpending * 52)
-        housePrice = housePrice * 1.05
         target = housePrice + (lifeSpending * 52) + (foodSpending * 52) + (recreationalSpending * 52)
+        console.log('INCOME ' + income)
+        console.log('TARGET ' + target)
         years += 1
       }
       this.yearsToReachGoals = years
